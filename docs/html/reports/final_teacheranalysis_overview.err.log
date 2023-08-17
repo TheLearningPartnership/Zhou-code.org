@@ -1,0 +1,60 @@
+Traceback (most recent call last):
+  File "/Users/rachel/Library/Python/3.9/lib/python/site-packages/jupyter_cache/executors/utils.py", line 58, in single_nb_execution
+    executenb(
+  File "/Users/rachel/Library/Python/3.9/lib/python/site-packages/nbclient/client.py", line 1305, in execute
+    return NotebookClient(nb=nb, resources=resources, km=km, **kwargs).execute()
+  File "/Users/rachel/Library/Python/3.9/lib/python/site-packages/jupyter_core/utils/__init__.py", line 166, in wrapped
+    return loop.run_until_complete(inner)
+  File "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/asyncio/base_events.py", line 642, in run_until_complete
+    return future.result()
+  File "/Users/rachel/Library/Python/3.9/lib/python/site-packages/nbclient/client.py", line 705, in async_execute
+    await self.async_execute_cell(
+  File "/Users/rachel/Library/Python/3.9/lib/python/site-packages/nbclient/client.py", line 1058, in async_execute_cell
+    await self._check_raise_for_error(cell, cell_index, exec_reply)
+  File "/Users/rachel/Library/Python/3.9/lib/python/site-packages/nbclient/client.py", line 914, in _check_raise_for_error
+    raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
+nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
+------------------
+output_notebook()
+
+# Computing the tenure distribution data again
+tenure_distribution = compute_tenure_distribution(data_sorted)
+
+# Create a new plot with a title and axis labels
+p = figure(title="Distribution of Maximum Tenure for Teachers", 
+           x_axis_label='Maximum Tenure (Years)', 
+           y_axis_label='Number of Teachers', 
+           tools="pan,box_zoom,reset,save",
+           width=600, height=400)
+
+# Data source for the plot
+source = ColumnDataSource(data=dict(
+    tenure=tenure_distribution.index,
+    count=tenure_distribution.values
+))
+
+# Add a hover tool for better interactivity
+hover = HoverTool()
+hover.tooltips = [("Maximum Tenure", "@tenure"), ("Number of Teachers", "@count")]
+p.add_tools(hover)
+
+# Add a bar renderer with legend
+p.vbar(x='tenure', top='count', width=0.5, source=source, legend_label="Teachers", color="navy")
+
+# Show the plot
+show(p)
+
+------------------
+
+
+[0;31m---------------------------------------------------------------------------[0m
+[0;31mNameError[0m                                 Traceback (most recent call last)
+[0;32m/var/folders/0y/_j87n5jn4j7grzdsq8lvjk_80000gn/T/ipykernel_47684/1787657841.py[0m in [0;36m<cell line: 14>[0;34m()[0m
+[1;32m     12[0m [0;34m[0m[0m
+[1;32m     13[0m [0;31m# Data source for the plot[0m[0;34m[0m[0;34m[0m[0;34m[0m[0m
+[0;32m---> 14[0;31m source = ColumnDataSource(data=dict(
+[0m[1;32m     15[0m     [0mtenure[0m[0;34m=[0m[0mtenure_distribution[0m[0;34m.[0m[0mindex[0m[0;34m,[0m[0;34m[0m[0;34m[0m[0m
+[1;32m     16[0m     [0mcount[0m[0;34m=[0m[0mtenure_distribution[0m[0;34m.[0m[0mvalues[0m[0;34m[0m[0;34m[0m[0m
+
+[0;31mNameError[0m: name 'ColumnDataSource' is not defined
+

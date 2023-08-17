@@ -1,0 +1,40 @@
+Traceback (most recent call last):
+  File "/Users/rachel/Library/Python/3.9/lib/python/site-packages/jupyter_cache/executors/utils.py", line 58, in single_nb_execution
+    executenb(
+  File "/Users/rachel/Library/Python/3.9/lib/python/site-packages/nbclient/client.py", line 1305, in execute
+    return NotebookClient(nb=nb, resources=resources, km=km, **kwargs).execute()
+  File "/Users/rachel/Library/Python/3.9/lib/python/site-packages/jupyter_core/utils/__init__.py", line 166, in wrapped
+    return loop.run_until_complete(inner)
+  File "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/asyncio/base_events.py", line 642, in run_until_complete
+    return future.result()
+  File "/Users/rachel/Library/Python/3.9/lib/python/site-packages/nbclient/client.py", line 705, in async_execute
+    await self.async_execute_cell(
+  File "/Users/rachel/Library/Python/3.9/lib/python/site-packages/nbclient/client.py", line 1058, in async_execute_cell
+    await self._check_raise_for_error(cell, cell_index, exec_reply)
+  File "/Users/rachel/Library/Python/3.9/lib/python/site-packages/nbclient/client.py", line 914, in _check_raise_for_error
+    raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
+nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
+------------------
+# Compute SHAP values for Gradient Boosting Regressor
+explainer_gbm = shap.TreeExplainer(gbm_reg)
+shap_values_gbm = explainer_gbm.shap_values(X_train)
+shap.summary_plot(shap_values_gbm, X_test)
+------------------
+
+
+[0;31m---------------------------------------------------------------------------[0m
+[0;31mIndexError[0m                                Traceback (most recent call last)
+[0;32m/var/folders/0y/_j87n5jn4j7grzdsq8lvjk_80000gn/T/ipykernel_89132/2083752598.py[0m in [0;36m<cell line: 4>[0;34m()[0m
+[1;32m      2[0m [0mexplainer_gbm[0m [0;34m=[0m [0mshap[0m[0;34m.[0m[0mTreeExplainer[0m[0;34m([0m[0mgbm_reg[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[1;32m      3[0m [0mshap_values_gbm[0m [0;34m=[0m [0mexplainer_gbm[0m[0;34m.[0m[0mshap_values[0m[0;34m([0m[0mX_train[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0;32m----> 4[0;31m [0mshap[0m[0;34m.[0m[0msummary_plot[0m[0;34m([0m[0mshap_values_gbm[0m[0;34m,[0m [0mX_test[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0m
+[0;32m~/Library/Python/3.9/lib/python/site-packages/shap/plots/_beeswarm.py[0m in [0;36msummary_legacy[0;34m(shap_values, features, feature_names, max_display, plot_type, color, axis_color, title, alpha, show, sort, color_bar, plot_size, layered_violin_max_num_bins, class_names, class_inds, color_bar_label, cmap, auto_size_plot, use_log_scale)[0m
+[1;32m    653[0m             [0mnp[0m[0;34m.[0m[0mrandom[0m[0;34m.[0m[0mshuffle[0m[0;34m([0m[0minds[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[1;32m    654[0m             [0;32mif[0m [0mvalues[0m [0;32mis[0m [0;32mnot[0m [0;32mNone[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
+[0;32m--> 655[0;31m                 [0mvalues[0m [0;34m=[0m [0mvalues[0m[0;34m[[0m[0minds[0m[0;34m][0m[0;34m[0m[0;34m[0m[0m
+[0m[1;32m    656[0m             [0mshaps[0m [0;34m=[0m [0mshaps[0m[0;34m[[0m[0minds[0m[0;34m][0m[0;34m[0m[0;34m[0m[0m
+[1;32m    657[0m             [0mcolored_feature[0m [0;34m=[0m [0;32mTrue[0m[0;34m[0m[0;34m[0m[0m
+
+[0;31mIndexError[0m: index 1026 is out of bounds for axis 0 with size 417
+
