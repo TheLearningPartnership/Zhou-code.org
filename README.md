@@ -26,22 +26,35 @@ Through narrative, visualizations, and code, this report explores the dataset to
 ### Prerequisites
 - Python 3.x
 - Jupyter Notebook
+
 ### Installation Steps
-1. Clone this repository to your local machine:
 
-2. Navigate to the cloned repository directory:
+1. **Clone the Repository:**
+    ```bash
+    git clone https://github.com/[Your_GitHub_Username]/Code.Org-Analysis-Report.git
+    ```
+    Replace `[Your_GitHub_Username]` with your actual GitHub username.
 
-3. Install the required Python packages:
+2. **Navigate to the Project Directory:**
+    ```bash
+    cd Code.Org-Analysis-Report
+    ```
 
-4. Launch Jupyter Notebook:
+3. **Install the Required Packages:**
+    ```bash
+    pip install -r requirements.txt
+    ```
 
-5. Open the desired `.ipynb` file in the Jupyter Notebook interface to view, run, or edit the code.
+4. **Launch Jupyter Notebook:**
+    ```bash
+    jupyter notebook
+    ```
+    This command will open a new tab in your web browser where you can navigate to the `.ipynb` files and run them.
 
 ### Generating the Jupyter Book
 If you want to regenerate the Jupyter Book (HTML files) with your modifications, run the following command:
 
 Replace `<your-book-folder-name>` with the name of the folder containing your Jupyter Book files.
-
 
 ## Acknowledgments
 - Thank you to Code.org for providing the valuable data that made this analysis possible.
