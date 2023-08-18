@@ -15,26 +15,81 @@ Traceback (most recent call last):
     raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
 nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
 ------------------
-# Compute SHAP values for Gradient Boosting Regressor
-explainer_gbm = shap.TreeExplainer(gbm_reg)
-shap_values_gbm = explainer_gbm.shap_values(X_train)
-shap.summary_plot(shap_values_gbm, X_test)
+import pandas as pd
+import numpy as np
+import statsmodels.api as sm
+from sklearn.preprocessing import StandardScaler
+from sklearn.cluster import KMeans
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LogisticRegression, LinearRegression
+from sklearn.ensemble import RandomForestRegressor, RandomForestClassifier, GradientBoostingRegressor
+from sklearn.neighbors import KNeighborsRegressor
+from sklearn.linear_model import Ridge, Lasso
+from sklearn.neural_network import MLPRegressor
+import xgboost as xgb
+from sklearn.svm import SVR
+from sklearn.metrics import mean_absolute_error,mean_squared_error, r2_score, accuracy_score, precision_score, recall_score, f1_score
+from sklearn.inspection import permutation_importance
+import matplotlib.pyplot as plt
+import seaborn as sns
+import shap
+
+import warnings
+warnings.filterwarnings('ignore')
+
+data = pd.read_csv('/Users/rachel/Library/CloudStorage/Dropbox-TLPSummerInterns/TLP Summer Intern Folder/Zhou/CODE - MPS_data_july_2023/mps_student_activity.tsv', sep='\t', on_bad_lines='skip')
+data_detail = pd.read_csv('/Users/rachel/Library/CloudStorage/Dropbox-TLPSummerInterns/TLP Summer Intern Folder/Zhou/CODE - MPS_data_july_2023/mps_student_activity_detail.tsv', sep='\t',on_bad_lines='skip')
+data_assessment = pd.read_csv('/Users/rachel/Library/CloudStorage/Dropbox-TLPSummerInterns/TLP Summer Intern Folder/Zhou/CODE - MPS_data_july_2023/mps_assessments.tsv', sep='\t', on_bad_lines='skip')
+data_assessment['school_year'] = data_assessment['script_name'].str[-4:]
 ------------------
 
+----- stderr -----
+Using `tqdm.autonotebook.tqdm` in notebook mode. Use `tqdm.tqdm` instead to force console mode (e.g. in jupyter console)
+------------------
 
 [0;31m---------------------------------------------------------------------------[0m
-[0;31mIndexError[0m                                Traceback (most recent call last)
-[0;32m/var/folders/0y/_j87n5jn4j7grzdsq8lvjk_80000gn/T/ipykernel_89132/2083752598.py[0m in [0;36m<cell line: 4>[0;34m()[0m
-[1;32m      2[0m [0mexplainer_gbm[0m [0;34m=[0m [0mshap[0m[0;34m.[0m[0mTreeExplainer[0m[0;34m([0m[0mgbm_reg[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
-[1;32m      3[0m [0mshap_values_gbm[0m [0;34m=[0m [0mexplainer_gbm[0m[0;34m.[0m[0mshap_values[0m[0;34m([0m[0mX_train[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
-[0;32m----> 4[0;31m [0mshap[0m[0;34m.[0m[0msummary_plot[0m[0;34m([0m[0mshap_values_gbm[0m[0;34m,[0m [0mX_test[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
-[0m
-[0;32m~/Library/Python/3.9/lib/python/site-packages/shap/plots/_beeswarm.py[0m in [0;36msummary_legacy[0;34m(shap_values, features, feature_names, max_display, plot_type, color, axis_color, title, alpha, show, sort, color_bar, plot_size, layered_violin_max_num_bins, class_names, class_inds, color_bar_label, cmap, auto_size_plot, use_log_scale)[0m
-[1;32m    653[0m             [0mnp[0m[0;34m.[0m[0mrandom[0m[0;34m.[0m[0mshuffle[0m[0;34m([0m[0minds[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
-[1;32m    654[0m             [0;32mif[0m [0mvalues[0m [0;32mis[0m [0;32mnot[0m [0;32mNone[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
-[0;32m--> 655[0;31m                 [0mvalues[0m [0;34m=[0m [0mvalues[0m[0;34m[[0m[0minds[0m[0;34m][0m[0;34m[0m[0;34m[0m[0m
-[0m[1;32m    656[0m             [0mshaps[0m [0;34m=[0m [0mshaps[0m[0;34m[[0m[0minds[0m[0;34m][0m[0;34m[0m[0;34m[0m[0m
-[1;32m    657[0m             [0mcolored_feature[0m [0;34m=[0m [0;32mTrue[0m[0;34m[0m[0;34m[0m[0m
+[0;31mFileNotFoundError[0m                         Traceback (most recent call last)
+[0;32m/var/folders/0y/_j87n5jn4j7grzdsq8lvjk_80000gn/T/ipykernel_94561/3920765610.py[0m in [0;36m<cell line: 23>[0;34m()[0m
+[1;32m     21[0m [0mwarnings[0m[0;34m.[0m[0mfilterwarnings[0m[0;34m([0m[0;34m'ignore'[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[1;32m     22[0m [0;34m[0m[0m
+[0;32m---> 23[0;31m [0mdata[0m [0;34m=[0m [0mpd[0m[0;34m.[0m[0mread_csv[0m[0;34m([0m[0;34m'/Users/rachel/Library/CloudStorage/Dropbox-TLPSummerInterns/TLP Summer Intern Folder/Zhou/CODE - MPS_data_july_2023/mps_student_activity.tsv'[0m[0;34m,[0m [0msep[0m[0;34m=[0m[0;34m'\t'[0m[0;34m,[0m [0mon_bad_lines[0m[0;34m=[0m[0;34m'skip'[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0m[1;32m     24[0m [0mdata_detail[0m [0;34m=[0m [0mpd[0m[0;34m.[0m[0mread_csv[0m[0;34m([0m[0;34m'/Users/rachel/Library/CloudStorage/Dropbox-TLPSummerInterns/TLP Summer Intern Folder/Zhou/CODE - MPS_data_july_2023/mps_student_activity_detail.tsv'[0m[0;34m,[0m [0msep[0m[0;34m=[0m[0;34m'\t'[0m[0;34m,[0m[0mon_bad_lines[0m[0;34m=[0m[0;34m'skip'[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[1;32m     25[0m [0mdata_assessment[0m [0;34m=[0m [0mpd[0m[0;34m.[0m[0mread_csv[0m[0;34m([0m[0;34m'/Users/rachel/Library/CloudStorage/Dropbox-TLPSummerInterns/TLP Summer Intern Folder/Zhou/CODE - MPS_data_july_2023/mps_assessments.tsv'[0m[0;34m,[0m [0msep[0m[0;34m=[0m[0;34m'\t'[0m[0;34m,[0m [0mon_bad_lines[0m[0;34m=[0m[0;34m'skip'[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
 
-[0;31mIndexError[0m: index 1026 is out of bounds for axis 0 with size 417
+[0;32m~/Library/Python/3.9/lib/python/site-packages/pandas/io/parsers/readers.py[0m in [0;36mread_csv[0;34m(filepath_or_buffer, sep, delimiter, header, names, index_col, usecols, dtype, engine, converters, true_values, false_values, skipinitialspace, skiprows, skipfooter, nrows, na_values, keep_default_na, na_filter, verbose, skip_blank_lines, parse_dates, infer_datetime_format, keep_date_col, date_parser, date_format, dayfirst, cache_dates, iterator, chunksize, compression, thousands, decimal, lineterminator, quotechar, quoting, doublequote, escapechar, comment, encoding, encoding_errors, dialect, on_bad_lines, delim_whitespace, low_memory, memory_map, float_precision, storage_options, dtype_backend)[0m
+[1;32m    910[0m     [0mkwds[0m[0;34m.[0m[0mupdate[0m[0;34m([0m[0mkwds_defaults[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[1;32m    911[0m [0;34m[0m[0m
+[0;32m--> 912[0;31m     [0;32mreturn[0m [0m_read[0m[0;34m([0m[0mfilepath_or_buffer[0m[0;34m,[0m [0mkwds[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0m[1;32m    913[0m [0;34m[0m[0m
+[1;32m    914[0m [0;34m[0m[0m
+
+[0;32m~/Library/Python/3.9/lib/python/site-packages/pandas/io/parsers/readers.py[0m in [0;36m_read[0;34m(filepath_or_buffer, kwds)[0m
+[1;32m    575[0m [0;34m[0m[0m
+[1;32m    576[0m     [0;31m# Create the parser.[0m[0;34m[0m[0;34m[0m[0;34m[0m[0m
+[0;32m--> 577[0;31m     [0mparser[0m [0;34m=[0m [0mTextFileReader[0m[0;34m([0m[0mfilepath_or_buffer[0m[0;34m,[0m [0;34m**[0m[0mkwds[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0m[1;32m    578[0m [0;34m[0m[0m
+[1;32m    579[0m     [0;32mif[0m [0mchunksize[0m [0;32mor[0m [0miterator[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
+
+[0;32m~/Library/Python/3.9/lib/python/site-packages/pandas/io/parsers/readers.py[0m in [0;36m__init__[0;34m(self, f, engine, **kwds)[0m
+[1;32m   1405[0m [0;34m[0m[0m
+[1;32m   1406[0m         [0mself[0m[0;34m.[0m[0mhandles[0m[0;34m:[0m [0mIOHandles[0m [0;34m|[0m [0;32mNone[0m [0;34m=[0m [0;32mNone[0m[0;34m[0m[0;34m[0m[0m
+[0;32m-> 1407[0;31m         [0mself[0m[0;34m.[0m[0m_engine[0m [0;34m=[0m [0mself[0m[0;34m.[0m[0m_make_engine[0m[0;34m([0m[0mf[0m[0;34m,[0m [0mself[0m[0;34m.[0m[0mengine[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0m[1;32m   1408[0m [0;34m[0m[0m
+[1;32m   1409[0m     [0;32mdef[0m [0mclose[0m[0;34m([0m[0mself[0m[0;34m)[0m [0;34m->[0m [0;32mNone[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
+
+[0;32m~/Library/Python/3.9/lib/python/site-packages/pandas/io/parsers/readers.py[0m in [0;36m_make_engine[0;34m(self, f, engine)[0m
+[1;32m   1659[0m                 [0;32mif[0m [0;34m"b"[0m [0;32mnot[0m [0;32min[0m [0mmode[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
+[1;32m   1660[0m                     [0mmode[0m [0;34m+=[0m [0;34m"b"[0m[0;34m[0m[0;34m[0m[0m
+[0;32m-> 1661[0;31m             self.handles = get_handle(
+[0m[1;32m   1662[0m                 [0mf[0m[0;34m,[0m[0;34m[0m[0;34m[0m[0m
+[1;32m   1663[0m                 [0mmode[0m[0;34m,[0m[0;34m[0m[0;34m[0m[0m
+
+[0;32m~/Library/Python/3.9/lib/python/site-packages/pandas/io/common.py[0m in [0;36mget_handle[0;34m(path_or_buf, mode, encoding, compression, memory_map, is_text, errors, storage_options)[0m
+[1;32m    857[0m         [0;32mif[0m [0mioargs[0m[0;34m.[0m[0mencoding[0m [0;32mand[0m [0;34m"b"[0m [0;32mnot[0m [0;32min[0m [0mioargs[0m[0;34m.[0m[0mmode[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
+[1;32m    858[0m             [0;31m# Encoding[0m[0;34m[0m[0;34m[0m[0;34m[0m[0m
+[0;32m--> 859[0;31m             handle = open(
+[0m[1;32m    860[0m                 [0mhandle[0m[0;34m,[0m[0;34m[0m[0;34m[0m[0m
+[1;32m    861[0m                 [0mioargs[0m[0;34m.[0m[0mmode[0m[0;34m,[0m[0;34m[0m[0;34m[0m[0m
+
+[0;31mFileNotFoundError[0m: [Errno 2] No such file or directory: '/Users/rachel/Library/CloudStorage/Dropbox-TLPSummerInterns/TLP Summer Intern Folder/Zhou/CODE - MPS_data_july_2023/mps_student_activity.tsv'
 
