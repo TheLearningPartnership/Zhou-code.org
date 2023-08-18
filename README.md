@@ -17,7 +17,9 @@ Through narrative, visualizations, and code, this report explores the dataset to
   - Teacher-Centric Analysis
   - Student-Centric Analysis
 - Advanced Exploratory Analysis
-- Learning Analytics
+  - Analysis of Teacher Platform Implementation
+  - Investigation of Student Learning Behaviors
+  - Predictive Modeling of Assessment Performance
 
 ## Installation and Running
 
