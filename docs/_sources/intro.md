@@ -1,10 +1,15 @@
-# Welcome to the Code.Org Analysis Report
+# Code, Clicks, and Classrooms: Exploring the Learning Behaviors of Code.org Users
 
-This report presents a comprehensive analysis of data collected from the Code.Org platform. Through a combination of narrative explanations, visualizations, and code demonstrations, we explore patterns, trends, and insights that offer a deeper understanding of user (both students and teachers) engagement and platform dynamics.
+Rachel (Yiqiu) Zhou
 
-The subsequent sections delve into various aspects of the data, from preliminary exploratory analyses to more advanced statistical interpretations. Our goal is to provide a clear, concise, and informative overview that aids stakeholders in making informed decisions.
+University of Illinois at Urbana-Champaign | yiqiuz3@illinois.edu
 
-Dive into the chapters to uncover the stories hidden in the data and the implications they hold for the future of Code.Org.
+## Abstract
+This report provides a comprehensive analysis of user engagement data from the Code.org platform, with a focus on both student and teacher interactions. The goal is to uncover patterns and trends that offer valuable insights into how students engage with Code.org. These findings aim to assist stakeholders like educators and platform developers in making data-driven decisions to improve engagement and learning outcomes.
+
+Through narrative, visualizations, and code, this report explores the dataset to identify key trends and derive meaningful implications. The subsequent sections provide an in-depth yet accessible analysis, starting with exploratory overviews and building to more advanced statistical interpretations.
+
+By diving into the chapters within, readers can uncover the stories hidden in the data - stories that illuminate the intricate dynamics shaping the Code.org user experience. The insights gleaned serve as a compass for stakeholders seeking to enhance platform effectiveness and foster engaging learning for all users.
 
 ```{tableofcontents}
 ```

@@ -1,0 +1,1382 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>5.3 Predictive Modeling of Assessment Performance &#8212; My sample book</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../../../../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../../../../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="../../../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css" />
+    <link rel="stylesheet" href="../../../../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../../../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
+    <script src="../../../../_static/jquery.js"></script>
+    <script src="../../../../_static/underscore.js"></script>
+    <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../../../../_static/doctools.js"></script>
+    <script src="../../../../_static/clipboard.min.js"></script>
+    <script src="../../../../_static/copybutton.js"></script>
+    <script src="../../../../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../../../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../../../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../../../../_static/sphinx-thebe.js"></script>
+    <script type="application/vnd.jupyter.widget-state+json">{"state": {"1acf30b77e06432dbee84776146503e2": {"model_module": "@jupyter-widgets/base", "model_module_version": "2.0.0", "model_name": "LayoutModel", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "2.0.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "2.0.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border_bottom": null, "border_left": null, "border_right": null, "border_top": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "1b35d8122ce0413c884017054f261cee": {"model_module": "@jupyter-widgets/controls", "model_module_version": "2.0.0", "model_name": "HTMLModel", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/controls", "_model_module_version": "2.0.0", "_model_name": "HTMLModel", "_view_count": null, "_view_module": "@jupyter-widgets/controls", "_view_module_version": "2.0.0", "_view_name": "HTMLView", "description": "", "description_allow_html": false, "layout": "IPY_MODEL_1acf30b77e06432dbee84776146503e2", "placeholder": "\u200b", "style": "IPY_MODEL_567fad640d4840149a1a400d0d065f74", "tabbable": null, "tooltip": null, "value": "100%"}}, "34442187cccb41919529914b3bb22e05": {"model_module": "@jupyter-widgets/base", "model_module_version": "2.0.0", "model_name": "LayoutModel", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "2.0.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "2.0.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border_bottom": null, "border_left": null, "border_right": null, "border_top": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "35d3a759fecf4f6f918ed0fd86c9021d": {"model_module": "@jupyter-widgets/controls", "model_module_version": "2.0.0", "model_name": "HTMLStyleModel", "state": {"_model_module": "@jupyter-widgets/controls", "_model_module_version": "2.0.0", "_model_name": "HTMLStyleModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "2.0.0", "_view_name": "StyleView", "background": null, "description_width": "", "font_size": null, "text_color": null}}, "453bb850fba840cea79727d2ffb16751": {"model_module": "@jupyter-widgets/base", "model_module_version": "2.0.0", "model_name": "LayoutModel", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "2.0.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "2.0.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border_bottom": null, "border_left": null, "border_right": null, "border_top": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "567fad640d4840149a1a400d0d065f74": {"model_module": "@jupyter-widgets/controls", "model_module_version": "2.0.0", "model_name": "HTMLStyleModel", "state": {"_model_module": "@jupyter-widgets/controls", "_model_module_version": "2.0.0", "_model_name": "HTMLStyleModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "2.0.0", "_view_name": "StyleView", "background": null, "description_width": "", "font_size": null, "text_color": null}}, "600dbffdf53a497fb763e45f2697ff17": {"model_module": "@jupyter-widgets/base", "model_module_version": "2.0.0", "model_name": "LayoutModel", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "2.0.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "2.0.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border_bottom": null, "border_left": null, "border_right": null, "border_top": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "778b4399cd3a4d11be08cbc20ff73643": {"model_module": "@jupyter-widgets/controls", "model_module_version": "2.0.0", "model_name": "HBoxModel", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/controls", "_model_module_version": "2.0.0", "_model_name": "HBoxModel", "_view_count": null, "_view_module": "@jupyter-widgets/controls", "_view_module_version": "2.0.0", "_view_name": "HBoxView", "box_style": "", "children": ["IPY_MODEL_1b35d8122ce0413c884017054f261cee", "IPY_MODEL_782314b359a54a08b34e1963cdf29432", "IPY_MODEL_79bc2a25b08e4622a0afcf1d5dcf7355"], "layout": "IPY_MODEL_453bb850fba840cea79727d2ffb16751", "tabbable": null, "tooltip": null}}, "782314b359a54a08b34e1963cdf29432": {"model_module": "@jupyter-widgets/controls", "model_module_version": "2.0.0", "model_name": "FloatProgressModel", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/controls", "_model_module_version": "2.0.0", "_model_name": "FloatProgressModel", "_view_count": null, "_view_module": "@jupyter-widgets/controls", "_view_module_version": "2.0.0", "_view_name": "ProgressView", "bar_style": "success", "description": "", "description_allow_html": false, "layout": "IPY_MODEL_600dbffdf53a497fb763e45f2697ff17", "max": 417.0, "min": 0.0, "orientation": "horizontal", "style": "IPY_MODEL_8348d668099a4ceb835b89dc68ac173d", "tabbable": null, "tooltip": null, "value": 417.0}}, "79bc2a25b08e4622a0afcf1d5dcf7355": {"model_module": "@jupyter-widgets/controls", "model_module_version": "2.0.0", "model_name": "HTMLModel", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/controls", "_model_module_version": "2.0.0", "_model_name": "HTMLModel", "_view_count": null, "_view_module": "@jupyter-widgets/controls", "_view_module_version": "2.0.0", "_view_name": "HTMLView", "description": "", "description_allow_html": false, "layout": "IPY_MODEL_34442187cccb41919529914b3bb22e05", "placeholder": "\u200b", "style": "IPY_MODEL_35d3a759fecf4f6f918ed0fd86c9021d", "tabbable": null, "tooltip": null, "value": " 417/417 [00:27&lt;00:00, 17.05it/s]"}}, "8348d668099a4ceb835b89dc68ac173d": {"model_module": "@jupyter-widgets/controls", "model_module_version": "2.0.0", "model_name": "ProgressStyleModel", "state": {"_model_module": "@jupyter-widgets/controls", "_model_module_version": "2.0.0", "_model_name": "ProgressStyleModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "2.0.0", "_view_name": "StyleView", "bar_color": null, "description_width": ""}}}, "version_major": 2, "version_minor": 0}</script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script crossorigin="anonymous" data-jupyter-widgets-cdn="https://cdn.jsdelivr.net/npm/" src="https://cdn.jsdelivr.net/npm/@jupyter-widgets/html-manager@1.0.6/dist/embed-amd.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'docs/jupyter_execute/docs/jupyter_execute/final_advancedanalysis_assesspredict';</script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+  
+
+<a class="navbar-brand logo" href="../../../../intro.html">
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../../../_static/logo.png" class="logo__image only-light" alt="Logo image"/>
+    <script>document.write(`<img src="../../../../_static/logo.png" class="logo__image only-dark" alt="Logo image"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../../../intro.html">
+                    Code, Clicks, and Classrooms: A Detailed Exploration of Code.org User Engagement and Behavior
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Dataset Overview</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../../../datasetintro.html">2. Overview of Datasets</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Descriptive Analysis</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../../final_teacheranalysis.html">Teacher-Centric Analysis</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../final_teacheranalysis1.html">3. Teacher-Centric Descriptive Analysis</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../../final_studentanalysis.html">Student-Centric Analysis</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../final_studentanalysis_activity1.html">4.1 Activity Performance Analysis</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../final_studentanalysis_activity2.html">4.1 Rention and Drop-Out</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../final_studentanalysis_assessment1.html">4.3 Assessment Analysis</a></li>
+</ul>
+</li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Advanced Exploratory Analysis</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../../../final_advancedanalysis.html">Learning Analytics</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../final_advancedanalysis_activity1.html">5.1 Analysis of Teacher Platform Implementation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../final_advancedanalysis_studentprofile.html">5.2 Investigation of Student Learning Behaviors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../final_advancedanalysis_assesspredict.html">5.3 Predictive Modeling of Assessment Performance</a></li>
+</ul>
+</li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=lab/tree/docs/docs/jupyter_execute/docs/jupyter_execute/final_advancedanalysis_assesspredict.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch onBinder"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img src="../../../../_static/images/logo_binder.svg">
+  </span>
+<span class="btn__text-container">Binder</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://datahub.berkeley.edu/hub/user-redirect/git-pull?repo=https%3A//github.com/executablebooks/jupyter-book&urlpath=lab/tree/jupyter-book/docs/docs/jupyter_execute/docs/jupyter_execute/final_advancedanalysis_assesspredict.ipynb&branch=master" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch onJupyterHub"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img src="../../../../_static/images/logo_jupyterhub.svg">
+  </span>
+<span class="btn__text-container">JupyterHub</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Fdocs/jupyter_execute/docs/jupyter_execute/final_advancedanalysis_assesspredict.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../../../_sources/docs/jupyter_execute/docs/jupyter_execute/final_advancedanalysis_assesspredict.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script>
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>5.3 Predictive Modeling of Assessment Performance</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#feature-engineering">Feature Engineering</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#teacher-implementation-level-clustering">Teacher Implementation Level Clustering</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#question-type-and-teacher-experience-features">Question Type and Teacher Experience Features</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#student-learning-behavior-features">Student Learning Behavior Features</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#model-training-and-evaluation">Model Training and Evaluation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#model-selection">Model Selection</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#model-performance">Model Performance</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#feature-importance-analysis">Feature Importance Analysis</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#feature-importance-plots">Feature Importance Plots</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#visualizing-gradient-boosting-importance-shap">Visualizing Gradient Boosting Importance: SHAP</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusion">Conclusion</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#key-insights"><strong>Key Insights</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#nurturing-consistent-learners">Nurturing Consistent Learners:</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#interventions-for-struggling-students">Interventions for Struggling Students:</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#reassessing-single-event-judgments">Reassessing Single-Event Judgments:</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#leveraging-learning-analytics">Leveraging Learning Analytics:</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">statsmodels.api</span> <span class="k">as</span> <span class="nn">sm</span>
+<span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">StandardScaler</span>
+<span class="kn">from</span> <span class="nn">sklearn.cluster</span> <span class="kn">import</span> <span class="n">KMeans</span>
+<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
+<span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">LogisticRegression</span><span class="p">,</span> <span class="n">LinearRegression</span>
+<span class="kn">from</span> <span class="nn">sklearn.ensemble</span> <span class="kn">import</span> <span class="n">RandomForestRegressor</span><span class="p">,</span> <span class="n">RandomForestClassifier</span><span class="p">,</span> <span class="n">GradientBoostingRegressor</span>
+<span class="kn">from</span> <span class="nn">sklearn.neighbors</span> <span class="kn">import</span> <span class="n">KNeighborsRegressor</span>
+<span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">Ridge</span><span class="p">,</span> <span class="n">Lasso</span>
+<span class="kn">from</span> <span class="nn">sklearn.neural_network</span> <span class="kn">import</span> <span class="n">MLPRegressor</span>
+<span class="kn">import</span> <span class="nn">xgboost</span> <span class="k">as</span> <span class="nn">xgb</span>
+<span class="kn">from</span> <span class="nn">sklearn.svm</span> <span class="kn">import</span> <span class="n">SVR</span>
+<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">mean_absolute_error</span><span class="p">,</span><span class="n">mean_squared_error</span><span class="p">,</span> <span class="n">r2_score</span><span class="p">,</span> <span class="n">accuracy_score</span><span class="p">,</span> <span class="n">precision_score</span><span class="p">,</span> <span class="n">recall_score</span><span class="p">,</span> <span class="n">f1_score</span>
+<span class="kn">from</span> <span class="nn">sklearn.inspection</span> <span class="kn">import</span> <span class="n">permutation_importance</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+<span class="kn">import</span> <span class="nn">shap</span>
+
+<span class="kn">import</span> <span class="nn">warnings</span>
+<span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s1">&#39;ignore&#39;</span><span class="p">)</span>
+
+<span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;/Users/rachel/Library/CloudStorage/Dropbox-TLPSummerInterns/TLP Summer Intern Folder/Zhou/CODE - MPS_data_july_2023/mps_student_activity.tsv&#39;</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s1">&#39;</span><span class="se">\t</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">on_bad_lines</span><span class="o">=</span><span class="s1">&#39;skip&#39;</span><span class="p">)</span>
+<span class="n">data_detail</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;/Users/rachel/Library/CloudStorage/Dropbox-TLPSummerInterns/TLP Summer Intern Folder/Zhou/CODE - MPS_data_july_2023/mps_student_activity_detail.tsv&#39;</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s1">&#39;</span><span class="se">\t</span><span class="s1">&#39;</span><span class="p">,</span><span class="n">on_bad_lines</span><span class="o">=</span><span class="s1">&#39;skip&#39;</span><span class="p">)</span>
+<span class="n">data_assessment</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;/Users/rachel/Library/CloudStorage/Dropbox-TLPSummerInterns/TLP Summer Intern Folder/Zhou/CODE - MPS_data_july_2023/mps_assessments.tsv&#39;</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s1">&#39;</span><span class="se">\t</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">on_bad_lines</span><span class="o">=</span><span class="s1">&#39;skip&#39;</span><span class="p">)</span>
+<span class="n">data_assessment</span><span class="p">[</span><span class="s1">&#39;school_year&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">data_assessment</span><span class="p">[</span><span class="s1">&#39;script_name&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="p">[</span><span class="o">-</span><span class="mi">4</span><span class="p">:]</span>
+</pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Using `tqdm.autonotebook.tqdm` in notebook mode. Use `tqdm.tqdm` instead to force console mode (e.g. in jupyter console)
+</pre></div>
+</div>
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">FileNotFoundError</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
+<span class="nn">/var/folders/0y/_j87n5jn4j7grzdsq8lvjk_80000gn/T/ipykernel_88623/3920765610.py</span> in <span class="ni">&lt;cell line: 23&gt;</span><span class="nt">()</span>
+<span class="g g-Whitespace">     </span><span class="mi">21</span> <span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s1">&#39;ignore&#39;</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">22</span> 
+<span class="ne">---&gt; </span><span class="mi">23</span> <span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;/Users/rachel/Library/CloudStorage/Dropbox-TLPSummerInterns/TLP Summer Intern Folder/Zhou/CODE - MPS_data_july_2023/mps_student_activity.tsv&#39;</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s1">&#39;</span><span class="se">\t</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">on_bad_lines</span><span class="o">=</span><span class="s1">&#39;skip&#39;</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">24</span> <span class="n">data_detail</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;/Users/rachel/Library/CloudStorage/Dropbox-TLPSummerInterns/TLP Summer Intern Folder/Zhou/CODE - MPS_data_july_2023/mps_student_activity_detail.tsv&#39;</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s1">&#39;</span><span class="se">\t</span><span class="s1">&#39;</span><span class="p">,</span><span class="n">on_bad_lines</span><span class="o">=</span><span class="s1">&#39;skip&#39;</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">25</span> <span class="n">data_assessment</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;/Users/rachel/Library/CloudStorage/Dropbox-TLPSummerInterns/TLP Summer Intern Folder/Zhou/CODE - MPS_data_july_2023/mps_assessments.tsv&#39;</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s1">&#39;</span><span class="se">\t</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">on_bad_lines</span><span class="o">=</span><span class="s1">&#39;skip&#39;</span><span class="p">)</span>
+
+<span class="nn">~/Library/Python/3.9/lib/python/site-packages/pandas/io/parsers/readers.py</span> in <span class="ni">read_csv</span><span class="nt">(filepath_or_buffer, sep, delimiter, header, names, index_col, usecols, dtype, engine, converters, true_values, false_values, skipinitialspace, skiprows, skipfooter, nrows, na_values, keep_default_na, na_filter, verbose, skip_blank_lines, parse_dates, infer_datetime_format, keep_date_col, date_parser, date_format, dayfirst, cache_dates, iterator, chunksize, compression, thousands, decimal, lineterminator, quotechar, quoting, doublequote, escapechar, comment, encoding, encoding_errors, dialect, on_bad_lines, delim_whitespace, low_memory, memory_map, float_precision, storage_options, dtype_backend)</span>
+<span class="g g-Whitespace">    </span><span class="mi">910</span>     <span class="n">kwds</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">kwds_defaults</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">911</span> 
+<span class="ne">--&gt; </span><span class="mi">912</span>     <span class="k">return</span> <span class="n">_read</span><span class="p">(</span><span class="n">filepath_or_buffer</span><span class="p">,</span> <span class="n">kwds</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">913</span> 
+<span class="g g-Whitespace">    </span><span class="mi">914</span> 
+
+<span class="nn">~/Library/Python/3.9/lib/python/site-packages/pandas/io/parsers/readers.py</span> in <span class="ni">_read</span><span class="nt">(filepath_or_buffer, kwds)</span>
+<span class="g g-Whitespace">    </span><span class="mi">575</span> 
+<span class="g g-Whitespace">    </span><span class="mi">576</span>     <span class="c1"># Create the parser.</span>
+<span class="ne">--&gt; </span><span class="mi">577</span>     <span class="n">parser</span> <span class="o">=</span> <span class="n">TextFileReader</span><span class="p">(</span><span class="n">filepath_or_buffer</span><span class="p">,</span> <span class="o">**</span><span class="n">kwds</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">578</span> 
+<span class="g g-Whitespace">    </span><span class="mi">579</span>     <span class="k">if</span> <span class="n">chunksize</span> <span class="ow">or</span> <span class="n">iterator</span><span class="p">:</span>
+
+<span class="nn">~/Library/Python/3.9/lib/python/site-packages/pandas/io/parsers/readers.py</span> in <span class="ni">__init__</span><span class="nt">(self, f, engine, **kwds)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1405</span> 
+<span class="g g-Whitespace">   </span><span class="mi">1406</span>         <span class="bp">self</span><span class="o">.</span><span class="n">handles</span><span class="p">:</span> <span class="n">IOHandles</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="ne">-&gt; </span><span class="mi">1407</span>         <span class="bp">self</span><span class="o">.</span><span class="n">_engine</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_make_engine</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1408</span> 
+<span class="g g-Whitespace">   </span><span class="mi">1409</span>     <span class="k">def</span> <span class="nf">close</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+
+<span class="nn">~/Library/Python/3.9/lib/python/site-packages/pandas/io/parsers/readers.py</span> in <span class="ni">_make_engine</span><span class="nt">(self, f, engine)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1659</span>                 <span class="k">if</span> <span class="s2">&quot;b&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">mode</span><span class="p">:</span>
+<span class="g g-Whitespace">   </span><span class="mi">1660</span>                     <span class="n">mode</span> <span class="o">+=</span> <span class="s2">&quot;b&quot;</span>
+<span class="ne">-&gt; </span><span class="mi">1661</span>             <span class="bp">self</span><span class="o">.</span><span class="n">handles</span> <span class="o">=</span> <span class="n">get_handle</span><span class="p">(</span>
+<span class="g g-Whitespace">   </span><span class="mi">1662</span>                 <span class="n">f</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1663</span>                 <span class="n">mode</span><span class="p">,</span>
+
+<span class="nn">~/Library/Python/3.9/lib/python/site-packages/pandas/io/common.py</span> in <span class="ni">get_handle</span><span class="nt">(path_or_buf, mode, encoding, compression, memory_map, is_text, errors, storage_options)</span>
+<span class="g g-Whitespace">    </span><span class="mi">857</span>         <span class="k">if</span> <span class="n">ioargs</span><span class="o">.</span><span class="n">encoding</span> <span class="ow">and</span> <span class="s2">&quot;b&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">ioargs</span><span class="o">.</span><span class="n">mode</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">858</span>             <span class="c1"># Encoding</span>
+<span class="ne">--&gt; </span><span class="mi">859</span>             <span class="n">handle</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">860</span>                 <span class="n">handle</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">861</span>                 <span class="n">ioargs</span><span class="o">.</span><span class="n">mode</span><span class="p">,</span>
+
+<span class="ne">FileNotFoundError</span>: [Errno 2] No such file or directory: &#39;/Users/rachel/Library/CloudStorage/Dropbox-TLPSummerInterns/TLP Summer Intern Folder/Zhou/CODE - MPS_data_july_2023/mps_student_activity.tsv&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<section class="tex2jax_ignore mathjax_ignore" id="predictive-modeling-of-assessment-performance">
+<h1>5.3 Predictive Modeling of Assessment Performance<a class="headerlink" href="#predictive-modeling-of-assessment-performance" title="Permalink to this heading">#</a></h1>
+<ol class="arabic simple">
+<li><p><strong>Feature Engineering</strong>: Created new features <code class="docutils literal notranslate"><span class="pre">implementation_level</span></code>, <code class="docutils literal notranslate"><span class="pre">first_year_of_teaching</span></code>, <code class="docutils literal notranslate"><span class="pre">child_level_type</span></code>, and learning profile labels.</p></li>
+<li><p><strong>Model Training and Evaluation</strong>: Leveraged linear regression and machine learning techniqes to predict student assessment scores. Calculated the MSE and R-Squared to evaluate the performance of the model.</p></li>
+<li><p><strong>Feature Importance Analysis</strong>: Interpreted the feature importance of the models to understand the relationship between the predictors and the target variable.</p></li>
+</ol>
+<section id="feature-engineering">
+<h2>Feature Engineering<a class="headerlink" href="#feature-engineering" title="Permalink to this heading">#</a></h2>
+<p>Three features were generated from the raw data:</p>
+<p><code class="code docutils literal notranslate"><span class="pre">implementation_level</span></code>: Categorized teachers into 3 levels (low, medium, high) based on their cumulative activity over time using K-Means clustering. This helps differentiate teachers based on their experience levels.</p>
+<p><code class="code docutils literal notranslate"><span class="pre">first_year_of_teaching</span></code>: Indicated whether a teacher is teaching a particular course for the first time. This captures how teacher proficiency changes over time.</p>
+<p><code class="code docutils literal notranslate"><span class="pre">child_level_type</span></code>: Rpepresented the quiz item type, can be Multi (single-select multi choice), Multi2 (choose-two multi-choice), and Match (matching items)</p>
+<section id="teacher-implementation-level-clustering">
+<h3>Teacher Implementation Level Clustering<a class="headerlink" href="#teacher-implementation-level-clustering" title="Permalink to this heading">#</a></h3>
+<p>This <code class="code docutils literal notranslate"><span class="pre">cluster_teachers_by_implementation</span></code> function processes data from activity dataset to categorize teachers based on their cumulative implementation levels over various school years.</p>
+<p>The implementation levels are determined by metrics such as the cumulative unique number of scripts assigned and the cumulative unique number of students they’ve interacted with up to a particular school year.</p>
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">compute_cumulative_unique</span><span class="p">(</span><span class="n">series</span><span class="p">):</span>
+    <span class="n">cumulative_list</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">seen</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">series</span><span class="p">:</span>
+        <span class="n">seen</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+        <span class="n">cumulative_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">seen</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">cumulative_list</span>
+
+<span class="k">def</span> <span class="nf">cluster_teachers_by_implementation</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
+    <span class="c1"># Step 1: Preprocess the Data</span>
+    <span class="n">data_sorted</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;teacher_user_id&#39;</span><span class="p">,</span> <span class="s1">&#39;school_year&#39;</span><span class="p">])</span>
+
+    <span class="c1"># Step 2: Compute cumulative unique values for scripts and students</span>
+    <span class="n">cumulative_data</span> <span class="o">=</span> <span class="n">data_sorted</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">&#39;teacher_user_id&#39;</span><span class="p">,</span> <span class="s1">&#39;school_year&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">agg</span><span class="p">({</span>
+        <span class="s1">&#39;script_id&#39;</span><span class="p">:</span> <span class="s1">&#39;unique&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;student_user_id&#39;</span><span class="p">:</span> <span class="s1">&#39;unique&#39;</span>
+    <span class="p">})</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
+    <span class="n">cumulative_data</span><span class="p">[</span><span class="s1">&#39;cumulative_scripts&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">cumulative_data</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;teacher_user_id&#39;</span><span class="p">)[</span><span class="s1">&#39;script_id&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">compute_cumulative_unique</span><span class="p">)</span>
+    <span class="n">cumulative_data</span><span class="p">[</span><span class="s1">&#39;cumulative_students&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">cumulative_data</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;teacher_user_id&#39;</span><span class="p">)[</span><span class="s1">&#39;student_user_id&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">compute_cumulative_unique</span><span class="p">)</span>
+
+    <span class="c1"># Step 3: Scale the Metrics</span>
+    <span class="n">scaler</span> <span class="o">=</span> <span class="n">StandardScaler</span><span class="p">()</span>
+    <span class="n">scaled_data</span> <span class="o">=</span> <span class="n">scaler</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">cumulative_data</span><span class="p">[[</span><span class="s1">&#39;cumulative_scripts&#39;</span><span class="p">,</span> <span class="s1">&#39;cumulative_students&#39;</span><span class="p">]])</span>
+
+    <span class="c1"># Step 4: Apply KMeans Clustering</span>
+    <span class="n">kmeans</span> <span class="o">=</span> <span class="n">KMeans</span><span class="p">(</span><span class="n">n_clusters</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">init</span><span class="o">=</span><span class="s1">&#39;k-means++&#39;</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+    <span class="n">cumulative_data</span><span class="p">[</span><span class="s1">&#39;cluster_id&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">kmeans</span><span class="o">.</span><span class="n">fit_predict</span><span class="p">(</span><span class="n">scaled_data</span><span class="p">)</span>
+
+    <span class="c1"># Step 5: Convert cluster IDs to labels</span>
+    <span class="n">cluster_labels</span> <span class="o">=</span> <span class="p">{</span><span class="mi">0</span><span class="p">:</span> <span class="s1">&#39;Low&#39;</span><span class="p">,</span> <span class="mi">2</span><span class="p">:</span> <span class="s1">&#39;Medium&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span> <span class="s1">&#39;High&#39;</span><span class="p">}</span>
+    <span class="n">cumulative_data</span><span class="p">[</span><span class="s1">&#39;implementation_level&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">cumulative_data</span><span class="p">[</span><span class="s1">&#39;cluster_id&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">cluster_labels</span><span class="p">)</span>
+    <span class="n">cluster_membership_df</span> <span class="o">=</span> <span class="n">cumulative_data</span><span class="p">[[</span><span class="s1">&#39;teacher_user_id&#39;</span><span class="p">,</span> <span class="s1">&#39;school_year&#39;</span><span class="p">,</span> <span class="s1">&#39;implementation_level&#39;</span><span class="p">]]</span>
+    <span class="n">cluster_membership_df</span><span class="p">[</span><span class="s1">&#39;school_year&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">cluster_membership_df</span><span class="p">[</span><span class="s1">&#39;school_year&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="p">[:</span><span class="mi">4</span><span class="p">]</span>
+    
+    <span class="k">return</span> <span class="n">cluster_membership_df</span>
+
+<span class="n">implementation</span> <span class="o">=</span> <span class="n">cluster_teachers_by_implementation</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+<span class="n">df_merged</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">data_assessment</span><span class="p">,</span> <span class="n">implementation</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;teacher_user_id&#39;</span><span class="p">,</span> <span class="s1">&#39;school_year&#39;</span><span class="p">],</span> <span class="n">how</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</details>
+</div>
+</section>
+<section id="question-type-and-teacher-experience-features">
+<h3>Question Type and Teacher Experience Features<a class="headerlink" href="#question-type-and-teacher-experience-features" title="Permalink to this heading">#</a></h3>
+<p>Previous descriptive analysis on assessment dataset has shown that correctness vary on course and question type, so here we extracted the feature <code class="code docutils literal notranslate"><span class="pre">child_level_type</span></code> to control for its impact.</p>
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Calculate the difficulty coefficient for each course and parent level</span>
+<span class="n">difficulty_coefficients</span> <span class="o">=</span> <span class="n">data_assessment</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">&#39;course_name&#39;</span><span class="p">,</span> <span class="s1">&#39;parent_level_type&#39;</span><span class="p">,</span><span class="s1">&#39;child_level_type&#39;</span><span class="p">])[</span><span class="s1">&#39;answer_correct_flag&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="p">(</span><span class="n">x</span> <span class="o">==</span> <span class="s1">&#39;Y&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
+<span class="n">difficulty_coefficients</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;course_name&#39;</span><span class="p">,</span> <span class="s1">&#39;parent_level_type&#39;</span><span class="p">,</span><span class="s1">&#39;child_level_type&#39;</span><span class="p">,</span> <span class="s1">&#39;difficulty_coefficient&#39;</span><span class="p">]</span>
+<span class="n">df_merged</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">df_merged</span><span class="p">,</span> <span class="n">difficulty_coefficients</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;course_name&#39;</span><span class="p">,</span><span class="s1">&#39;parent_level_type&#39;</span><span class="p">,</span><span class="s1">&#39;child_level_type&#39;</span><span class="p">,],</span> <span class="n">how</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">)</span>
+
+<span class="c1"># Calculate the first year each teacher taught this course</span>
+<span class="n">first_year_taught</span> <span class="o">=</span> <span class="n">df_merged</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;teacher_user_id&#39;</span><span class="p">)[</span><span class="s1">&#39;school_year&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">()</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
+<span class="n">first_year_taught</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;teacher_user_id&#39;</span><span class="p">,</span> <span class="s1">&#39;first_year_taught&#39;</span><span class="p">]</span>
+<span class="n">df_merged</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">df_merged</span><span class="p">,</span> <span class="n">first_year_taught</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="s1">&#39;teacher_user_id&#39;</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">)</span>
+<span class="c1"># Create a new column to indicate whether the current year is the first year the teacher taught this course</span>
+<span class="n">df_merged</span><span class="p">[</span><span class="s1">&#39;first_year_of_teaching&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">df_merged</span><span class="p">[</span><span class="s1">&#39;school_year&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">df_merged</span><span class="p">[</span><span class="s1">&#39;first_year_taught&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span> <span class="c1">#1 represents is first year</span>
+
+<span class="c1"># Replace &#39;Y&#39; and &#39;N&#39; in &#39;answer_correct_flag&#39; with 1 and 0 respectively</span>
+<span class="n">df_merged</span><span class="p">[</span><span class="s1">&#39;answer_correct_flag&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_merged</span><span class="p">[</span><span class="s1">&#39;answer_correct_flag&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">map</span><span class="p">({</span><span class="s1">&#39;Y&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;N&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">})</span>
+<span class="n">df_model</span> <span class="o">=</span> <span class="n">df_merged</span><span class="p">[[</span><span class="s1">&#39;teacher_user_id&#39;</span><span class="p">,</span><span class="s1">&#39;course_name&#39;</span><span class="p">,</span><span class="s1">&#39;school_year&#39;</span><span class="p">,</span><span class="s1">&#39;parent_level_type&#39;</span><span class="p">,</span><span class="s1">&#39;child_level_type&#39;</span><span class="p">,</span><span class="s1">&#39;student_user_id&#39;</span><span class="p">,</span><span class="s1">&#39;implementation_level&#39;</span><span class="p">,</span><span class="s1">&#39;difficulty_coefficient&#39;</span><span class="p">,</span><span class="s1">&#39;first_year_of_teaching&#39;</span><span class="p">,</span><span class="s1">&#39;answer_correct_flag&#39;</span><span class="p">]]</span>
+<span class="n">df_model</span><span class="p">[</span><span class="s1">&#39;difficulty_coefficient&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">df_model</span><span class="p">[</span><span class="s1">&#39;difficulty_coefficient&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</details>
+</div>
+</section>
+<section id="student-learning-behavior-features">
+<h3>Student Learning Behavior Features<a class="headerlink" href="#student-learning-behavior-features" title="Permalink to this heading">#</a></h3>
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Calculating the time gap between created_at and updated_at timestamps</span>
+<span class="n">data_detail</span><span class="p">[</span><span class="s1">&#39;created_at&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">data_detail</span><span class="p">[</span><span class="s1">&#39;created_at&#39;</span><span class="p">])</span>
+<span class="n">data_detail</span><span class="p">[</span><span class="s1">&#39;updated_at&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">data_detail</span><span class="p">[</span><span class="s1">&#39;updated_at&#39;</span><span class="p">])</span>
+<span class="n">data_detail</span><span class="p">[</span><span class="s1">&#39;time_gap&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">data_detail</span><span class="p">[</span><span class="s1">&#39;updated_at&#39;</span><span class="p">]</span> <span class="o">-</span> <span class="n">data_detail</span><span class="p">[</span><span class="s1">&#39;created_at&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">total_seconds</span><span class="p">()</span> 
+<span class="c1"># Filtering the data based on the given criteria</span>
+<span class="n">filtered_data</span> <span class="o">=</span> <span class="n">data_detail</span><span class="p">[(</span><span class="n">data_detail</span><span class="p">[</span><span class="s1">&#39;attempts&#39;</span><span class="p">]</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">)</span> <span class="o">&amp;</span> 
+                     <span class="p">(</span><span class="n">data_detail</span><span class="p">[</span><span class="s1">&#39;time_gap&#39;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="o">&amp;</span> 
+                     <span class="p">(</span><span class="n">data_detail</span><span class="p">[</span><span class="s1">&#39;time_gap&#39;</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="mi">60</span><span class="o">*</span><span class="mi">15</span><span class="p">)]</span>
+
+<span class="c1"># Categorizing the test results based on provided breakdown</span>
+<span class="k">def</span> <span class="nf">categorize_test_result</span><span class="p">(</span><span class="n">result</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">result</span> <span class="o">&lt;</span> <span class="mi">20</span> <span class="ow">and</span> <span class="n">result</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s1">&#39;Failed&#39;</span>
+    <span class="k">elif</span> <span class="mi">20</span> <span class="o">&lt;=</span> <span class="n">result</span> <span class="o">&lt;</span> <span class="mi">30</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s1">&#39;Pass (Not Optimal)&#39;</span>
+    <span class="k">elif</span> <span class="mi">30</span> <span class="o">&lt;=</span> <span class="n">result</span> <span class="o">&lt;</span> <span class="mi">1000</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s1">&#39;Optimal&#39;</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s1">&#39;Special&#39;</span>
+
+<span class="n">filtered_data</span><span class="p">[</span><span class="s1">&#39;test_result_category&#39;</span><span class="p">]</span> <span class="o">=</span><span class="n">filtered_data</span><span class="p">[</span><span class="s1">&#39;best_result&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">categorize_test_result</span><span class="p">)</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd"># Identify Learning Behaviors for the filtered data</span>
+<span class="sd">def assign_behavior_label(row):</span>
+<span class="sd">    # Check for Rapid Guessing first</span>
+<span class="sd">    if (row[&#39;attempts&#39;] &gt; 1) and (row[&#39;time_gap&#39;] / row[&#39;attempts&#39;] &lt;= 5) and (row[&#39;test_result_category&#39;] in [&#39;Optimal&#39;, &#39;Pass (Not Optimal)&#39;]):</span>
+<span class="sd">        return &quot;Rapid Guessing&quot;</span>
+<span class="sd">    elif (row[&#39;attempts&#39;] == 1) and (row[&#39;test_result_category&#39;] == &#39;Failed&#39;):</span>
+<span class="sd">        return &quot;One-shot Failures&quot;</span>
+<span class="sd">    elif (row[&#39;attempts&#39;] &gt; 3) and (row[&#39;test_result_category&#39;] == &#39;Failed&#39;):</span>
+<span class="sd">        return &quot;Strugglers&quot;</span>
+<span class="sd">    elif row[&#39;test_result_category&#39;] == &#39;Pass (Not Optimal)&#39;:</span>
+<span class="sd">        return &quot;Suboptimal Success&quot;</span>
+<span class="sd">    elif (row[&#39;attempts&#39;] == 1) and (row[&#39;test_result_category&#39;] == &#39;Optimal&#39;):</span>
+<span class="sd">        return &quot;Succeed at First Trial&quot;</span>
+<span class="sd">    elif (row[&#39;attempts&#39;] &gt; 3) and (row[&#39;time_gap&#39;] &gt; 60) and (row[&#39;test_result_category&#39;] == &#39;Optimal&#39;):</span>
+<span class="sd">        return &quot;Consistent Learner&quot;</span>
+<span class="sd">    else:</span>
+<span class="sd">        return &quot;Others&quot;</span>
+<span class="sd">&quot;&quot;&quot;</span>  
+<span class="k">def</span> <span class="nf">assign_behavior_label</span><span class="p">(</span><span class="n">row</span><span class="p">):</span>
+    <span class="c1"># Check for Rapid Guessing first</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="s1">&#39;attempts&#39;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="s1">&#39;time_gap&#39;</span><span class="p">]</span> <span class="o">/</span> <span class="n">row</span><span class="p">[</span><span class="s1">&#39;attempts&#39;</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="mi">5</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="s1">&#39;test_result_category&#39;</span><span class="p">]</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;Optimal&#39;</span><span class="p">,</span> <span class="s1">&#39;Pass (Not Optimal)&#39;</span><span class="p">]):</span>
+        <span class="k">return</span> <span class="s2">&quot;Rapid Guessing&quot;</span>
+    <span class="k">elif</span> <span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="s1">&#39;attempts&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="s1">&#39;test_result_category&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;Failed&#39;</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s2">&quot;One-shot Failures&quot;</span>
+    <span class="k">elif</span> <span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="s1">&#39;attempts&#39;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">3</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="s1">&#39;test_result_category&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;Failed&#39;</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s2">&quot;Strugglers&quot;</span>
+    <span class="k">elif</span> <span class="n">row</span><span class="p">[</span><span class="s1">&#39;test_result_category&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;Pass (Not Optimal)&#39;</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s2">&quot;Suboptimal Success&quot;</span>
+    <span class="k">elif</span> <span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="s1">&#39;attempts&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="s1">&#39;test_result_category&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;Optimal&#39;</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s2">&quot;Succeed at First Trial&quot;</span>
+    <span class="k">elif</span> <span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="s1">&#39;attempts&#39;</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="mi">3</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="s1">&#39;time_gap&#39;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">59</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="s1">&#39;test_result_category&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;Optimal&#39;</span><span class="p">):</span> <span class="c1">#both over 50%</span>
+        <span class="k">return</span> <span class="s2">&quot;Consistent Learner&quot;</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s2">&quot;Others&quot;</span>
+    
+<span class="n">filtered_data</span><span class="p">[</span><span class="s1">&#39;behavior_label&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">filtered_data</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">assign_behavior_label</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="c1"># Counting occurrences of each label</span>
+<span class="n">behavior_counts</span> <span class="o">=</span> <span class="n">filtered_data</span><span class="p">[</span><span class="s1">&#39;behavior_label&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span>
+
+<span class="c1"># convert counts to proportion to standardize the data</span>
+<span class="n">grouped_data</span> <span class="o">=</span> <span class="n">filtered_data</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">&#39;student_user_id&#39;</span><span class="p">,</span> <span class="s1">&#39;school_year&#39;</span><span class="p">,</span> <span class="s1">&#39;behavior_label&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">size</span><span class="p">()</span><span class="o">.</span><span class="n">unstack</span><span class="p">()</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">grouped_data</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">:]</span> <span class="o">=</span> <span class="n">grouped_data</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">:]</span><span class="o">.</span><span class="n">div</span><span class="p">(</span><span class="n">grouped_data</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">:]</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+<span class="c1"># Standardizing the data</span>
+<span class="n">scaler</span> <span class="o">=</span> <span class="n">StandardScaler</span><span class="p">()</span>
+<span class="n">grouped_data</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">:]</span> <span class="o">=</span> <span class="n">scaler</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">grouped_data</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">:])</span>
+<span class="n">grouped_data</span><span class="p">[</span><span class="s1">&#39;school_year&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">grouped_data</span><span class="p">[</span><span class="s1">&#39;school_year&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="p">[:</span><span class="mi">4</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</details>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_model</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">df_model</span><span class="p">,</span> <span class="n">grouped_data</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;student_user_id&#39;</span><span class="p">,</span><span class="s1">&#39;school_year&#39;</span><span class="p">],</span> <span class="n">how</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">)</span>
+<span class="n">df_model</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>teacher_user_id</th>
+      <th>course_name</th>
+      <th>school_year</th>
+      <th>parent_level_type</th>
+      <th>child_level_type</th>
+      <th>student_user_id</th>
+      <th>implementation_level</th>
+      <th>difficulty_coefficient</th>
+      <th>first_year_of_teaching</th>
+      <th>answer_correct_flag</th>
+      <th>Consistent Learner</th>
+      <th>One-shot Failures</th>
+      <th>Others</th>
+      <th>Rapid Guessing</th>
+      <th>Strugglers</th>
+      <th>Suboptimal Success</th>
+      <th>Succeed at First Trial</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>24529224</td>
+      <td>csd</td>
+      <td>2017</td>
+      <td>Gamelab</td>
+      <td>Multi</td>
+      <td>33728229</td>
+      <td>High</td>
+      <td>0.64523</td>
+      <td>1</td>
+      <td>0.0</td>
+      <td>-0.945497</td>
+      <td>-0.026028</td>
+      <td>0.655204</td>
+      <td>0.984262</td>
+      <td>-0.235071</td>
+      <td>-0.450502</td>
+      <td>-0.30247</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>24529224</td>
+      <td>csd</td>
+      <td>2017</td>
+      <td>Gamelab</td>
+      <td>Multi</td>
+      <td>33718947</td>
+      <td>High</td>
+      <td>0.64523</td>
+      <td>1</td>
+      <td>1.0</td>
+      <td>-1.047306</td>
+      <td>-0.026028</td>
+      <td>0.668506</td>
+      <td>-0.483908</td>
+      <td>1.368678</td>
+      <td>-0.450502</td>
+      <td>-0.30247</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>24529224</td>
+      <td>csd</td>
+      <td>2017</td>
+      <td>Gamelab</td>
+      <td>Multi</td>
+      <td>29432841</td>
+      <td>High</td>
+      <td>0.64523</td>
+      <td>1</td>
+      <td>0.0</td>
+      <td>-0.679255</td>
+      <td>-0.026028</td>
+      <td>0.960175</td>
+      <td>0.238762</td>
+      <td>-0.466998</td>
+      <td>-0.450502</td>
+      <td>-0.30247</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>24529224</td>
+      <td>csd</td>
+      <td>2017</td>
+      <td>Gamelab</td>
+      <td>Multi</td>
+      <td>33752236</td>
+      <td>High</td>
+      <td>0.64523</td>
+      <td>1</td>
+      <td>0.0</td>
+      <td>-0.993994</td>
+      <td>-0.026028</td>
+      <td>1.486539</td>
+      <td>-0.248622</td>
+      <td>-0.466998</td>
+      <td>-0.450502</td>
+      <td>-0.30247</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>24529224</td>
+      <td>csd</td>
+      <td>2017</td>
+      <td>Gamelab</td>
+      <td>Multi</td>
+      <td>33752305</td>
+      <td>High</td>
+      <td>0.64523</td>
+      <td>1</td>
+      <td>0.0</td>
+      <td>-0.868710</td>
+      <td>-0.026028</td>
+      <td>1.591301</td>
+      <td>-0.636637</td>
+      <td>-0.466998</td>
+      <td>-0.450502</td>
+      <td>-0.30247</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</section>
+</section>
+<section id="model-training-and-evaluation">
+<h2>Model Training and Evaluation<a class="headerlink" href="#model-training-and-evaluation" title="Permalink to this heading">#</a></h2>
+<ol class="arabic simple">
+<li><p>Split the data into training and testing sets.</p></li>
+<li><p>Train Linear Regression, Random Forest, Gradient Boosting, and Neural Network models.</p></li>
+<li><p>Evaluate the models on the test set using metrics like MAE, MS, RMSE and R-Squared.</p></li>
+</ol>
+<section id="model-selection">
+<h3>Model Selection<a class="headerlink" href="#model-selection" title="Permalink to this heading">#</a></h3>
+<table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Model</p></th>
+<th class="head"><p>Description</p></th>
+<th class="head"><p>Characteristics</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Linear Regression</p></td>
+<td><p>Models the linear relationship between the dependent and independent variables.</p></td>
+<td><p>Adv: Simple, interpretable.<br>Disadv: Assumes linear relationships; Sensitive to outliers.</p></td>
+</tr>
+<tr class="row-odd"><td><p>Random Forest Regressor</p></td>
+<td><p>Ensemble method using multiple decision trees.</p></td>
+<td><p>Adv: Handles linear/non-linear data; Less prone to overfitting.<br>Disadv: Can be computationally intensive.</p></td>
+</tr>
+<tr class="row-even"><td><p>Gradient Boosting Regressor</p></td>
+<td><p>Boosting technique that builds trees sequentially.</p></td>
+<td><p>Adv: High predictive accuracy; Captures subtle patterns.<br>Disadv: Requires tuning; Can overfit noisy data.</p></td>
+</tr>
+<tr class="row-odd"><td><p>Support Vector Regression (SVR)</p></td>
+<td><p>Regression technique to find hyperplanes in high dimensional space.</p></td>
+<td><p>Adv: Effective in high-dimensional spaces; Models non-linear relationships.<br>Disadv: Needs data scaling; Kernel and parameter choice crucial.</p></td>
+</tr>
+<tr class="row-even"><td><p>Ridge Regression</p></td>
+<td><p>Linear regression with L2 regularization.</p></td>
+<td><p>Adv: Counters multicollinearity; Prevents overfitting.<br>Disadv: Might not provide feature selection.</p></td>
+</tr>
+<tr class="row-odd"><td><p>Lasso Regression</p></td>
+<td><p>Linear regression with L1 regularization.</p></td>
+<td><p>Adv: Can result in feature selection.<br>Disadv: Might underfit with excessive regularization.</p></td>
+</tr>
+<tr class="row-even"><td><p>Neural Network</p></td>
+<td><p>Comprises layers of interconnected nodes.</p></td>
+<td><p>Adv: Models complex relationships; Flexible.<br>Disadv: Needs more data; Black-box nature; Computationally intensive.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data_cleaned</span> <span class="o">=</span> <span class="n">df_model</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
+
+<span class="c1"># Feature Engineering: Aggregate answer_correct_flag</span>
+<span class="n">aggregated_data</span> <span class="o">=</span> <span class="n">data_cleaned</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">&#39;teacher_user_id&#39;</span><span class="p">,</span> <span class="s1">&#39;course_name&#39;</span><span class="p">,</span> <span class="s1">&#39;school_year&#39;</span><span class="p">,</span> 
+                                        <span class="s1">&#39;parent_level_type&#39;</span><span class="p">,</span> <span class="s1">&#39;child_level_type&#39;</span><span class="p">,</span> <span class="s1">&#39;student_user_id&#39;</span><span class="p">])[</span><span class="s1">&#39;answer_correct_flag&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
+<span class="n">aggregated_data</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;answer_correct_flag&#39;</span><span class="p">:</span> <span class="s1">&#39;avg_answer_correct&#39;</span><span class="p">},</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># Merging aggregated_data with data_cleaned</span>
+<span class="n">merged_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">aggregated_data</span><span class="p">,</span> <span class="n">data_cleaned</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;answer_correct_flag&#39;</span><span class="p">]),</span> 
+                       <span class="n">on</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;teacher_user_id&#39;</span><span class="p">,</span> <span class="s1">&#39;course_name&#39;</span><span class="p">,</span> <span class="s1">&#39;school_year&#39;</span><span class="p">,</span> <span class="s1">&#39;parent_level_type&#39;</span><span class="p">,</span> 
+                           <span class="s1">&#39;child_level_type&#39;</span><span class="p">,</span> <span class="s1">&#39;student_user_id&#39;</span><span class="p">],</span> 
+                       <span class="n">how</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">drop_duplicates</span><span class="p">()</span>
+
+<span class="c1"># Encode categorical variables</span>
+<span class="n">cols_to_drop</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;teacher_user_id&#39;</span><span class="p">,</span> <span class="s1">&#39;course_name&#39;</span><span class="p">,</span> <span class="s1">&#39;school_year&#39;</span><span class="p">,</span> <span class="s1">&#39;parent_level_type&#39;</span><span class="p">,</span> <span class="s1">&#39;student_user_id&#39;</span><span class="p">,</span> <span class="s1">&#39;avg_answer_correct&#39;</span><span class="p">,</span><span class="s1">&#39;difficulty_coefficient&#39;</span><span class="p">,</span><span class="s1">&#39;Others&#39;</span><span class="p">]</span>
+<span class="n">merged_data_encoded</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">get_dummies</span><span class="p">(</span><span class="n">merged_data</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="n">cols_to_drop</span><span class="p">),</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;implementation_level&#39;</span><span class="p">,</span> <span class="s1">&#39;child_level_type&#39;</span><span class="p">])</span>
+
+<span class="n">X</span> <span class="o">=</span> <span class="n">merged_data_encoded</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">merged_data</span><span class="p">[</span><span class="s1">&#39;avg_answer_correct&#39;</span><span class="p">]</span>
+<span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">36</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</details>
+</div>
+</section>
+<section id="model-performance">
+<h3>Model Performance<a class="headerlink" href="#model-performance" title="Permalink to this heading">#</a></h3>
+<div class="cell tag_hide-input docutils container">
+<details class="hide above-input">
+<summary aria-label="Toggle hidden content">
+<span class="collapsed">Show code cell source</span>
+<span class="expanded">Hide code cell source</span>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Train regression models</span>
+<span class="n">linear_reg</span> <span class="o">=</span> <span class="n">LinearRegression</span><span class="p">()</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+<span class="n">rf_reg</span> <span class="o">=</span> <span class="n">RandomForestRegressor</span><span class="p">(</span><span class="n">random_state</span><span class="o">=</span><span class="mi">36</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+<span class="n">gbm_reg</span> <span class="o">=</span> <span class="n">GradientBoostingRegressor</span><span class="p">(</span><span class="n">random_state</span><span class="o">=</span><span class="mi">36</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+<span class="n">svr_reg</span> <span class="o">=</span> <span class="n">SVR</span><span class="p">()</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+<span class="n">ridge_reg</span> <span class="o">=</span> <span class="n">Ridge</span><span class="p">()</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+<span class="n">lasso_reg</span> <span class="o">=</span> <span class="n">Lasso</span><span class="p">()</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+<span class="n">nn_reg</span> <span class="o">=</span> <span class="n">MLPRegressor</span><span class="p">(</span><span class="n">max_iter</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">36</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+
+<span class="n">linear_preds</span> <span class="o">=</span> <span class="n">linear_reg</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+<span class="n">rf_preds</span> <span class="o">=</span> <span class="n">rf_reg</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+<span class="n">gbm_preds</span> <span class="o">=</span> <span class="n">gbm_reg</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+<span class="n">svr_preds</span> <span class="o">=</span> <span class="n">svr_reg</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+<span class="n">ridge_preds</span> <span class="o">=</span> <span class="n">ridge_reg</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+<span class="n">lasso_preds</span> <span class="o">=</span> <span class="n">lasso_reg</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+<span class="n">nn_preds</span> <span class="o">=</span> <span class="n">nn_reg</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+
+<span class="n">regression_metrics</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;Model&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;Linear Regression&#39;</span><span class="p">,</span> <span class="s1">&#39;Random Forest&#39;</span><span class="p">,</span> <span class="s1">&#39;Gradient Boosting&#39;</span><span class="p">,</span> <span class="s1">&#39;Support Vector Regression&#39;</span><span class="p">,</span> <span class="s1">&#39;Ridge Regression&#39;</span><span class="p">,</span> <span class="s1">&#39;Lasso Regression&#39;</span><span class="p">,</span> <span class="s1">&#39;Neural Network&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;MAE&#39;</span><span class="p">:</span> <span class="p">[</span><span class="n">mean_absolute_error</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">linear_preds</span><span class="p">),</span> <span class="n">mean_absolute_error</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">rf_preds</span><span class="p">),</span> <span class="n">mean_absolute_error</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">gbm_preds</span><span class="p">),</span> <span class="n">mean_absolute_error</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">svr_preds</span><span class="p">),</span> <span class="n">mean_absolute_error</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">ridge_preds</span><span class="p">),</span> <span class="n">mean_absolute_error</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">lasso_preds</span><span class="p">),</span> <span class="n">mean_absolute_error</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">nn_preds</span><span class="p">)],</span>
+    <span class="s1">&#39;MSE&#39;</span><span class="p">:</span> <span class="p">[</span><span class="n">mean_squared_error</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">linear_preds</span><span class="p">),</span> <span class="n">mean_squared_error</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">rf_preds</span><span class="p">),</span> <span class="n">mean_squared_error</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">gbm_preds</span><span class="p">),</span> <span class="n">mean_squared_error</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">svr_preds</span><span class="p">),</span> <span class="n">mean_squared_error</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">ridge_preds</span><span class="p">),</span> <span class="n">mean_squared_error</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">lasso_preds</span><span class="p">),</span> <span class="n">mean_squared_error</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">nn_preds</span><span class="p">)],</span>
+    <span class="s1">&#39;RMSE&#39;</span><span class="p">:</span> <span class="p">[</span><span class="n">mean_squared_error</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">linear_preds</span><span class="p">,</span> <span class="n">squared</span><span class="o">=</span><span class="kc">False</span><span class="p">),</span> <span class="n">mean_squared_error</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">rf_preds</span><span class="p">,</span> <span class="n">squared</span><span class="o">=</span><span class="kc">False</span><span class="p">),</span> <span class="n">mean_squared_error</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">gbm_preds</span><span class="p">,</span> <span class="n">squared</span><span class="o">=</span><span class="kc">False</span><span class="p">),</span> <span class="n">mean_squared_error</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">svr_preds</span><span class="p">,</span> <span class="n">squared</span><span class="o">=</span><span class="kc">False</span><span class="p">),</span><span class="n">mean_squared_error</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">ridge_preds</span><span class="p">,</span> <span class="n">squared</span><span class="o">=</span><span class="kc">False</span><span class="p">),</span> <span class="n">mean_squared_error</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">lasso_preds</span><span class="p">,</span> <span class="n">squared</span><span class="o">=</span><span class="kc">False</span><span class="p">),</span> <span class="n">mean_squared_error</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">nn_preds</span><span class="p">,</span> <span class="n">squared</span><span class="o">=</span><span class="kc">False</span><span class="p">)],</span>
+    <span class="s1">&#39;R-squared&#39;</span><span class="p">:</span> <span class="p">[</span><span class="n">r2_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">linear_preds</span><span class="p">),</span> <span class="n">r2_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">rf_preds</span><span class="p">),</span> <span class="n">r2_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">gbm_preds</span><span class="p">),</span> <span class="n">r2_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">svr_preds</span><span class="p">),</span><span class="n">r2_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">ridge_preds</span><span class="p">),</span> <span class="n">r2_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">lasso_preds</span><span class="p">),</span> <span class="n">r2_score</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">nn_preds</span><span class="p">)]</span>
+<span class="p">}</span>
+
+<span class="n">performance_df_reg</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">regression_metrics</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</details>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">performance_df_reg</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Model</th>
+      <th>MAE</th>
+      <th>MSE</th>
+      <th>RMSE</th>
+      <th>R-squared</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Linear Regression</td>
+      <td>0.312055</td>
+      <td>0.134970</td>
+      <td>0.367383</td>
+      <td>0.167158</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Random Forest</td>
+      <td>0.295157</td>
+      <td>0.141233</td>
+      <td>0.375809</td>
+      <td>0.128515</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Gradient Boosting</td>
+      <td>0.284917</td>
+      <td>0.121339</td>
+      <td>0.348338</td>
+      <td>0.251268</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Support Vector Regression</td>
+      <td>0.280131</td>
+      <td>0.135936</td>
+      <td>0.368695</td>
+      <td>0.161196</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Ridge Regression</td>
+      <td>0.312097</td>
+      <td>0.134972</td>
+      <td>0.367386</td>
+      <td>0.167144</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>Lasso Regression</td>
+      <td>0.351759</td>
+      <td>0.162388</td>
+      <td>0.402974</td>
+      <td>-0.002027</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>Neural Network</td>
+      <td>0.285009</td>
+      <td>0.126396</td>
+      <td>0.355522</td>
+      <td>0.220067</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p><strong>Gradient Boosting</strong> and <strong>Neural Network</strong> models demonstrate superior performance compared to the baseline Linear Regression model for this dataset.</p>
+</section>
+</section>
+<section id="feature-importance-analysis">
+<h2>Feature Importance Analysis<a class="headerlink" href="#feature-importance-analysis" title="Permalink to this heading">#</a></h2>
+<p>Feature importance plots for Gradient Boosting and Neural Network are presetned since they are the two best-performaing models.</p>
+<section id="feature-importance-plots">
+<h3>Feature Importance Plots<a class="headerlink" href="#feature-importance-plots" title="Permalink to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">gb_feature_importance</span> <span class="o">=</span> <span class="n">gbm_reg</span><span class="o">.</span><span class="n">feature_importances_</span>
+<span class="c1"># Extracting feature importance for Neural Network (using permutation importance)</span>
+<span class="n">nn_perm_importance</span> <span class="o">=</span> <span class="n">permutation_importance</span><span class="p">(</span><span class="n">nn_reg</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">,</span> <span class="n">n_repeats</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">36</span><span class="p">)</span>
+<span class="n">nn_feature_importance</span> <span class="o">=</span> <span class="n">nn_perm_importance</span><span class="o">.</span><span class="n">importances_mean</span>
+
+<span class="c1"># Creating DataFrames for visualization</span>
+<span class="n">gb_importance_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+    <span class="s1">&#39;Feature&#39;</span><span class="p">:</span> <span class="n">X</span><span class="o">.</span><span class="n">columns</span><span class="p">,</span>
+    <span class="s1">&#39;Importance&#39;</span><span class="p">:</span> <span class="n">gb_feature_importance</span>
+<span class="p">})</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="s1">&#39;Importance&#39;</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="n">nn_importance_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+    <span class="s1">&#39;Feature&#39;</span><span class="p">:</span> <span class="n">X</span><span class="o">.</span><span class="n">columns</span><span class="p">,</span>
+    <span class="s1">&#39;Importance&#39;</span><span class="p">:</span> <span class="n">nn_feature_importance</span>
+<span class="p">})</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="s1">&#39;Importance&#39;</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="c1"># Visualizing the feature importances</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">nrows</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">ncols</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+
+<span class="c1"># Gradient Boosting feature importance</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">barplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s1">&#39;Importance&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;Feature&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">gb_importance_df</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">8</span><span class="p">),</span> <span class="n">ax</span><span class="o">=</span><span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">palette</span><span class="o">=</span><span class="s1">&#39;viridis&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Top 8 Feature Importances from Gradient Boosting&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Importance Score&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Features&#39;</span><span class="p">)</span>
+
+<span class="c1"># Neural Network feature importance</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">barplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s1">&#39;Importance&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;Feature&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">nn_importance_df</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">8</span><span class="p">),</span> <span class="n">ax</span><span class="o">=</span><span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">palette</span><span class="o">=</span><span class="s1">&#39;viridis&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Top 8 Feature Importances from Neural Network (Permutation Importance)&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Importance Score&#39;</span><span class="p">)</span>
+<span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Features&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../../../_images/b36a7430c24ef02be813f931e06e487cfd73b2a25b594b59a6a8efa1041c402f.png" src="../../../../_images/b36a7430c24ef02be813f931e06e487cfd73b2a25b594b59a6a8efa1041c402f.png" />
+</div>
+</div>
+</section>
+<section id="visualizing-gradient-boosting-importance-shap">
+<h3>Visualizing Gradient Boosting Importance: SHAP<a class="headerlink" href="#visualizing-gradient-boosting-importance-shap" title="Permalink to this heading">#</a></h3>
+<p>SHAP (SHapley Additive exPlanations) values provide a unified measure of feature importance and effects, taking into account the interaction effects among features. It gives a value for each feature for each prediction, indicating the direction and magnitude of the feature’s effect.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Compute SHAP values for Gradient Boosting Regressor</span>
+<span class="n">explainer_gbm</span> <span class="o">=</span> <span class="n">shap</span><span class="o">.</span><span class="n">TreeExplainer</span><span class="p">(</span><span class="n">gbm_reg</span><span class="p">)</span>
+<span class="n">shap_values_gbm</span> <span class="o">=</span> <span class="n">explainer_gbm</span><span class="o">.</span><span class="n">shap_values</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span>
+<span class="n">shap</span><span class="o">.</span><span class="n">summary_plot</span><span class="p">(</span><span class="n">shap_values_gbm</span><span class="p">,</span> <span class="n">X_train</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../../../_images/4edd59ca80388c3658df5b44c40a6392a9316f39cdec63750bb1e38e6f630d6c.png" src="../../../../_images/4edd59ca80388c3658df5b44c40a6392a9316f39cdec63750bb1e38e6f630d6c.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># For the Neural Network model using KernelExplainer</span>
+<span class="n">nn_background_data</span> <span class="o">=</span> <span class="n">shap</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>  <span class="c1"># Randomly sample 100 instances from training data as background data</span>
+<span class="n">nn_explainer</span> <span class="o">=</span> <span class="n">shap</span><span class="o">.</span><span class="n">KernelExplainer</span><span class="p">(</span><span class="n">nn_reg</span><span class="o">.</span><span class="n">predict</span><span class="p">,</span> <span class="n">nn_background_data</span><span class="p">)</span>
+<span class="n">nn_shap_values</span> <span class="o">=</span> <span class="n">nn_explainer</span><span class="o">.</span><span class="n">shap_values</span><span class="p">(</span><span class="n">X_test</span><span class="p">,</span> <span class="n">nsamples</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>  <span class="c1"># Using 100 Monte Carlo samples</span>
+
+<span class="n">shap</span><span class="o">.</span><span class="n">summary_plot</span><span class="p">(</span><span class="n">nn_shap_values</span><span class="p">,</span> <span class="n">X_test</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<script type="application/vnd.jupyter.widget-view+json">{"model_id": "778b4399cd3a4d11be08cbc20ff73643", "version_major": 2, "version_minor": 0}</script><img alt="../../../../_images/412a9551d197d65a752c69ccf701558091cf28405367d5156b22f4a6bd3528b2.png" src="../../../../_images/412a9551d197d65a752c69ccf701558091cf28405367d5156b22f4a6bd3528b2.png" />
+</div>
+</div>
+<p><strong>Vertical Axis</strong>: Each row on the y-axis corresponds to a feature in the dataset.
+Features at the top are the most influential, with significance decreasing as you move downwards.</p>
+<p><strong>Horizontal Axis</strong>: Represents the SHAP value for each feature. The further a dot is from the center, the greater its impact on the prediction.
+Right of Center (positive values): Features that push the prediction higher.
+Left of Center (negative values): Features that push the prediction lower.</p>
+<p><strong>Color</strong>: The color intensity signifies the magnitude of the feature value.
+Red Dots: High feature values. For example, <u> red dots on the right suggests that high values of this feature increase the assessment scores </u>.
+Blue Dots: Low feature values. For example, <u> blue dots on the right suggests that low values of this feature increase the assessment scores </u>.</p>
+<p>A mix of red and blue dots spread across both sides indicates that the feature can either increase or decrease the prediction, depending on its value and potential interactions with other features. For instance, both very high and very low values of a feature might increase the prediction, while mid-range values decrease it.</p>
+</section>
+</section>
+<section id="conclusion">
+<h2>Conclusion<a class="headerlink" href="#conclusion" title="Permalink to this heading">#</a></h2>
+<div class="tip admonition">
+<p class="admonition-title">Insights</p>
+<ol class="arabic simple">
+<li><p><strong>Dominance of Question Types</strong>:
+The predominant role of question types is evident, with ‘matching’ and ‘single choice’ emerging as strong positive predictors of scores. This aligns with finding from assessment section where matching question is the easiest type of question, followed by single-choice question.</p></li>
+<li><p><strong>Student Learning Profiles Matter</strong>:
+Beyond the inherent question type, it’s evident that a student’s daily activity engagement patterns can predict their assessment scores. The profiles ‘consistent learner’ is positively associated with assessment scores. Students who made more than three attempts, took longer time gaps (more than 60 seconds between attempts), and eventually reached optimal results, were positively correlated with better assessment outcomes. This group represents learners who might not succeed initially but exhibit a pattern of progressive improvement without resorting to rapid guessing.</p></li>
+<li><p><strong>Concerning Learning Patterns</strong>:
+In contrast, the ‘struggler’ profile negatively correlates with performance, indicating that students who failed more than three times and spent over one minute on the platform were found to be at risk. Targeted support may help remediate these learner needs.</p></li>
+<li><p><strong>Potential Misconceptions Addressed</strong>:
+Interestingly, isolated instances of either a single failure or immediate success didn’t significantly impact the overall assessment results. Further investigation is needed to explore the nuances of these behaviors.</p></li>
+</ol>
+</div>
+<p>These findings underscore the importance of perseverance and sustained effort in achieving positive learning outcomes. <strong>The path to mastery appears more predictive than isolated setbacks or fluctuations.</strong> Supporting students in forging consistent engagement and gradual improvement, rather than overreacting to temporary setbacks or spikes, may therefore be beneficial. However, further research is needed to establish causal mechanisms underlying these associations.</p>
+</section>
+<section id="key-insights">
+<h2><strong>Key Insights</strong><a class="headerlink" href="#key-insights" title="Permalink to this heading">#</a></h2>
+<section id="nurturing-consistent-learners">
+<h3>Nurturing Consistent Learners:<a class="headerlink" href="#nurturing-consistent-learners" title="Permalink to this heading">#</a></h3>
+<p><strong>Educators &amp; Curriculum Designers</strong>:</p>
+<ul class="simple">
+<li><p>The positive correlation between ‘consistent learners’ and better outcomes underscores the importance of fostering a learning environment that values persistence. Instead of focusing solely on immediate results, curriculums can be designed to reward progressive improvements, encouraging students to embrace learning as a journey rather than a destination.</p></li>
+</ul>
+<p><strong>EdTech Platforms</strong>:</p>
+<ul class="simple">
+<li><p>Tools and platforms can be designed to provide feedback over time, highlighting students’ progression and areas of steady improvement. This can motivate students to persevere, recognizing that their consistent efforts are being acknowledged.</p></li>
+</ul>
+</section>
+<section id="interventions-for-struggling-students">
+<h3>Interventions for Struggling Students:<a class="headerlink" href="#interventions-for-struggling-students" title="Permalink to this heading">#</a></h3>
+<p><strong>Teachers &amp; Instrcutors</strong>:</p>
+<ul class="simple">
+<li><p>Identifying students who consistently struggle and take longer than usual can be crucial. Interventions, such as additional tutoring sessions or supplementary resources, can be recommended for these students to address their specific challenges.</p></li>
+</ul>
+</section>
+<section id="reassessing-single-event-judgments">
+<h3>Reassessing Single-Event Judgments:<a class="headerlink" href="#reassessing-single-event-judgments" title="Permalink to this heading">#</a></h3>
+<p><strong>Educators &amp; School Administrators</strong>:</p>
+<ul class="simple">
+<li><p>The non-significant correlation between one-time failures/successes and overall outcomes challenges the traditional notion of labeling students based on isolated incidents. Continuous assessment, rather than a singular reliance on one-time tests, can provide a more holistic understanding of a student’s learning.</p></li>
+</ul>
+<p><strong>Test &amp; Quiz Designers</strong>:</p>
+<ul class="simple">
+<li><p>Incorporate a mix of questions that assess both immediate comprehension and the ability to learn from mistakes. This ensures that students who might not get things right initially but have the potential to learn and improve aren’t unfairly penalized.</p></li>
+</ul>
+</section>
+<section id="leveraging-learning-analytics">
+<h3>Leveraging Learning Analytics:<a class="headerlink" href="#leveraging-learning-analytics" title="Permalink to this heading">#</a></h3>
+<p><strong>EdTech Companies &amp; Platform Developers</strong>:</p>
+<ul class="simple">
+<li><p>Educational platforms enabled by data mining and learning analytics techniques offer opportunities to automatically detect student learning patterns and surface actionable insights in real time. Developers could embed early alert systems and trigger notifications when algorithms identify students requiring timely interventions, allowing educators to provide targeted support.</p></li>
+</ul>
+<p><strong>Research &amp; Academic Communities</strong>:</p>
+<ul class="simple">
+<li><p>Continued research in the intersection of education and technology can provide deeper insights into evolving student behaviors, especially in the digital age. Collaborative efforts between researchers and educators can lead to more effective teaching strategies tailored to the needs of modern students.</p></li>
+</ul>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./docs/jupyter_execute/docs/jupyter_execute"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#feature-engineering">Feature Engineering</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#teacher-implementation-level-clustering">Teacher Implementation Level Clustering</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#question-type-and-teacher-experience-features">Question Type and Teacher Experience Features</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#student-learning-behavior-features">Student Learning Behavior Features</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#model-training-and-evaluation">Model Training and Evaluation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#model-selection">Model Selection</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#model-performance">Model Performance</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#feature-importance-analysis">Feature Importance Analysis</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#feature-importance-plots">Feature Importance Plots</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#visualizing-gradient-boosting-importance-shap">Visualizing Gradient Boosting Importance: SHAP</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conclusion">Conclusion</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#key-insights"><strong>Key Insights</strong></a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#nurturing-consistent-learners">Nurturing Consistent Learners:</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#interventions-for-struggling-students">Interventions for Struggling Students:</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#reassessing-single-event-judgments">Reassessing Single-Event Judgments:</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#leveraging-learning-analytics">Leveraging Learning Analytics:</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By The Jupyter Book Community
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  <p class="copyright">
+    
+      © Copyright 2022.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../../../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../../../../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
