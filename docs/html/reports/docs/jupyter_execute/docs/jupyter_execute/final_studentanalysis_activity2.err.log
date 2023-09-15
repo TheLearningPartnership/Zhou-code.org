@@ -1,0 +1,76 @@
+Traceback (most recent call last):
+  File "/Users/rachel/Library/Python/3.9/lib/python/site-packages/jupyter_cache/executors/utils.py", line 58, in single_nb_execution
+    executenb(
+  File "/Users/rachel/Library/Python/3.9/lib/python/site-packages/nbclient/client.py", line 1305, in execute
+    return NotebookClient(nb=nb, resources=resources, km=km, **kwargs).execute()
+  File "/Users/rachel/Library/Python/3.9/lib/python/site-packages/jupyter_core/utils/__init__.py", line 166, in wrapped
+    return loop.run_until_complete(inner)
+  File "/Library/Developer/CommandLineTools/Library/Frameworks/Python3.framework/Versions/3.9/lib/python3.9/asyncio/base_events.py", line 642, in run_until_complete
+    return future.result()
+  File "/Users/rachel/Library/Python/3.9/lib/python/site-packages/nbclient/client.py", line 705, in async_execute
+    await self.async_execute_cell(
+  File "/Users/rachel/Library/Python/3.9/lib/python/site-packages/nbclient/client.py", line 1058, in async_execute_cell
+    await self._check_raise_for_error(cell, cell_index, exec_reply)
+  File "/Users/rachel/Library/Python/3.9/lib/python/site-packages/nbclient/client.py", line 914, in _check_raise_for_error
+    raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
+nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
+------------------
+import pandas as pd
+import numpy as np
+from math import ceil
+from bokeh.io import output_notebook, show
+from bokeh.plotting import figure, show
+from bokeh.models import ColumnDataSource, HoverTool, LinearAxis, Range1d, Span, Label, LabelSet
+from bokeh.layouts import gridplot, column
+from bokeh.palettes import Spectral8, Pastel1
+from bokeh.transform import cumsum
+output_notebook()
+
+data = pd.read_csv('/Users/rachel/Library/CloudStorage/Dropbox-TLPSummerInterns/TLP Summer Intern Folder/Zhou/CODE - MPS_data_july_2023/mps_student_activity_detail.tsv', sep='\t',on_bad_lines='skip')
+------------------
+
+
+[0;31m---------------------------------------------------------------------------[0m
+[0;31mFileNotFoundError[0m                         Traceback (most recent call last)
+[0;32m/var/folders/0y/_j87n5jn4j7grzdsq8lvjk_80000gn/T/ipykernel_88658/717740684.py[0m in [0;36m<cell line: 12>[0;34m()[0m
+[1;32m     10[0m [0moutput_notebook[0m[0;34m([0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[1;32m     11[0m [0;34m[0m[0m
+[0;32m---> 12[0;31m [0mdata[0m [0;34m=[0m [0mpd[0m[0;34m.[0m[0mread_csv[0m[0;34m([0m[0;34m'/Users/rachel/Library/CloudStorage/Dropbox-TLPSummerInterns/TLP Summer Intern Folder/Zhou/CODE - MPS_data_july_2023/mps_student_activity_detail.tsv'[0m[0;34m,[0m [0msep[0m[0;34m=[0m[0;34m'\t'[0m[0;34m,[0m[0mon_bad_lines[0m[0;34m=[0m[0;34m'skip'[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0m
+[0;32m~/Library/Python/3.9/lib/python/site-packages/pandas/io/parsers/readers.py[0m in [0;36mread_csv[0;34m(filepath_or_buffer, sep, delimiter, header, names, index_col, usecols, dtype, engine, converters, true_values, false_values, skipinitialspace, skiprows, skipfooter, nrows, na_values, keep_default_na, na_filter, verbose, skip_blank_lines, parse_dates, infer_datetime_format, keep_date_col, date_parser, date_format, dayfirst, cache_dates, iterator, chunksize, compression, thousands, decimal, lineterminator, quotechar, quoting, doublequote, escapechar, comment, encoding, encoding_errors, dialect, on_bad_lines, delim_whitespace, low_memory, memory_map, float_precision, storage_options, dtype_backend)[0m
+[1;32m    910[0m     [0mkwds[0m[0;34m.[0m[0mupdate[0m[0;34m([0m[0mkwds_defaults[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[1;32m    911[0m [0;34m[0m[0m
+[0;32m--> 912[0;31m     [0;32mreturn[0m [0m_read[0m[0;34m([0m[0mfilepath_or_buffer[0m[0;34m,[0m [0mkwds[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0m[1;32m    913[0m [0;34m[0m[0m
+[1;32m    914[0m [0;34m[0m[0m
+
+[0;32m~/Library/Python/3.9/lib/python/site-packages/pandas/io/parsers/readers.py[0m in [0;36m_read[0;34m(filepath_or_buffer, kwds)[0m
+[1;32m    575[0m [0;34m[0m[0m
+[1;32m    576[0m     [0;31m# Create the parser.[0m[0;34m[0m[0;34m[0m[0;34m[0m[0m
+[0;32m--> 577[0;31m     [0mparser[0m [0;34m=[0m [0mTextFileReader[0m[0;34m([0m[0mfilepath_or_buffer[0m[0;34m,[0m [0;34m**[0m[0mkwds[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0m[1;32m    578[0m [0;34m[0m[0m
+[1;32m    579[0m     [0;32mif[0m [0mchunksize[0m [0;32mor[0m [0miterator[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
+
+[0;32m~/Library/Python/3.9/lib/python/site-packages/pandas/io/parsers/readers.py[0m in [0;36m__init__[0;34m(self, f, engine, **kwds)[0m
+[1;32m   1405[0m [0;34m[0m[0m
+[1;32m   1406[0m         [0mself[0m[0;34m.[0m[0mhandles[0m[0;34m:[0m [0mIOHandles[0m [0;34m|[0m [0;32mNone[0m [0;34m=[0m [0;32mNone[0m[0;34m[0m[0;34m[0m[0m
+[0;32m-> 1407[0;31m         [0mself[0m[0;34m.[0m[0m_engine[0m [0;34m=[0m [0mself[0m[0;34m.[0m[0m_make_engine[0m[0;34m([0m[0mf[0m[0;34m,[0m [0mself[0m[0;34m.[0m[0mengine[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0m[1;32m   1408[0m [0;34m[0m[0m
+[1;32m   1409[0m     [0;32mdef[0m [0mclose[0m[0;34m([0m[0mself[0m[0;34m)[0m [0;34m->[0m [0;32mNone[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
+
+[0;32m~/Library/Python/3.9/lib/python/site-packages/pandas/io/parsers/readers.py[0m in [0;36m_make_engine[0;34m(self, f, engine)[0m
+[1;32m   1659[0m                 [0;32mif[0m [0;34m"b"[0m [0;32mnot[0m [0;32min[0m [0mmode[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
+[1;32m   1660[0m                     [0mmode[0m [0;34m+=[0m [0;34m"b"[0m[0;34m[0m[0;34m[0m[0m
+[0;32m-> 1661[0;31m             self.handles = get_handle(
+[0m[1;32m   1662[0m                 [0mf[0m[0;34m,[0m[0;34m[0m[0;34m[0m[0m
+[1;32m   1663[0m                 [0mmode[0m[0;34m,[0m[0;34m[0m[0;34m[0m[0m
+
+[0;32m~/Library/Python/3.9/lib/python/site-packages/pandas/io/common.py[0m in [0;36mget_handle[0;34m(path_or_buf, mode, encoding, compression, memory_map, is_text, errors, storage_options)[0m
+[1;32m    857[0m         [0;32mif[0m [0mioargs[0m[0;34m.[0m[0mencoding[0m [0;32mand[0m [0;34m"b"[0m [0;32mnot[0m [0;32min[0m [0mioargs[0m[0;34m.[0m[0mmode[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
+[1;32m    858[0m             [0;31m# Encoding[0m[0;34m[0m[0;34m[0m[0;34m[0m[0m
+[0;32m--> 859[0;31m             handle = open(
+[0m[1;32m    860[0m                 [0mhandle[0m[0;34m,[0m[0;34m[0m[0;34m[0m[0m
+[1;32m    861[0m                 [0mioargs[0m[0;34m.[0m[0mmode[0m[0;34m,[0m[0;34m[0m[0;34m[0m[0m
+
+[0;31mFileNotFoundError[0m: [Errno 2] No such file or directory: '/Users/rachel/Library/CloudStorage/Dropbox-TLPSummerInterns/TLP Summer Intern Folder/Zhou/CODE - MPS_data_july_2023/mps_student_activity_detail.tsv'
+
